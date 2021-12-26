@@ -75,7 +75,7 @@ public class Magnifier : MonoBehaviour
     float xmin, ymin, xmax, ymax;
 
 
-    // range from (-1, -1) to (1, 1) inclusive, with (-1, -1) being screen's lower-left, and (1, 1) being screen's lower-right
+    // range from (-1, -1) to (1, 1) inclusive, with (-1, -1) being screen's lower-left, and (1, 1) being screen's upper-right
     void SetMagnifyRegion_Internal()
     {
 
@@ -96,6 +96,7 @@ public class Magnifier : MonoBehaviour
 
         Matrix4x4 persp = Matrix4x4.Frustum(l, r, b, t, n, f);
         camera.projectionMatrix = persp;
+        camera.cullingMatrix = persp * camera.worldToCameraMatrix;
 
     }
 
